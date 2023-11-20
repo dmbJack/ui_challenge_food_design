@@ -13,153 +13,155 @@ class FoodsScreen extends StatelessWidget {
       backgroundColor: const Color.fromRGBO(236, 239, 234, 1),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 40.h,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Container(
-                height: 50.w,
-                width: 50.w,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    color: Colors.white),
-                child: IconButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                    icon: Icon(
-                      Icons.close_outlined,
-                      size: 30.w,
-                    )),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(
+                height: 40.h,
               ),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50.w),
-                child: Image.asset(
-                  'assets/user-1.jpg',
-                  width: 50.w,
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                Container(
                   height: 50.w,
-                  fit: BoxFit.cover,
+                  width: 50.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(15),
+                      color: Colors.white),
+                  child: IconButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(
+                        Icons.close_outlined,
+                        size: 30.w,
+                      )),
+                ),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(50.w),
+                  child: Image.asset(
+                    'assets/user-1.jpg',
+                    width: 50.w,
+                    height: 50.w,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              ]),
+              SizedBox(
+                height: 10.h,
+              ),
+              Text(
+                "Plats",
+                style: GoogleFonts.poppins(
+                    fontSize: 32.sp, fontWeight: FontWeight.w700),
+              ),
+              SizedBox(
+                height: 10.h,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ...ProductModel.products.map((e) {
+                      return FullCardFood(
+                        label: e.name,
+                        price: e.price,
+                        image: e.image,
+                        userImage: e.userImage,
+                        isSelected: e.name == "Salade" ? true : false,
+                        isBlackFriday: e.name == "Salade" ? true : false,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      ProductScreen(product: e)));
+                        },
+                      );
+                    }),
+                    // const FullCardFood(
+                    //   label: "Salade",
+                    //   price: "25",
+                    //   image: "assets/food-4.png",
+                    //   userImage: ["assets/user-1.jpg"],
+                    //   isSelected: true,
+                    // ),
+                    // SizedBox(
+                    //   width: 20.h,
+                    // ),
+                    // const FullCardFood(
+                    //   label: "Viande",
+                    //   price: "25",
+                    //   image: "assets/food-3.png",
+                    //   userImage: ["assets/user-1.jpg", "assets/user-2.jpg"],
+                    //   isSelected: false,
+                    // ),
+                    // SizedBox(
+                    //   width: 20.h,
+                    // ),
+                    // const FullCardFood(
+                    //   label: "Crudité",
+                    //   price: "21",
+                    //   image: "assets/food-5.png",
+                    //   userImage: ["assets/user-1.jpg"],
+                    //   isSelected: false,
+                    // ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ...ProductModel.products.map((e) {
+                      return FullCardFood(
+                        label: e.name,
+                        price: e.price,
+                        image: e.image,
+                        userImage: e.userImage,
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ProductScreen(
+                                        product: e,
+                                      )));
+                        },
+                      );
+                    }),
+                    // const FullCardFood(
+                    //   label: "Crudité",
+                    //   price: "29",
+                    //   image: "assets/food-5.png",
+                    //   userImage: ["assets/user-1.jpg"],
+                    //   isSelected: false,
+                    // ),
+                    // SizedBox(
+                    //   width: 20.h,
+                    // ),
+                    // const FullCardFood(
+                    //   label: "Viande",
+                    //   price: "18",
+                    //   image: "assets/food-3.png",
+                    //   userImage: ["assets/user-1.jpg", "assets/user-2.jpg"],
+                    //   isSelected: false,
+                    // ),
+                    // SizedBox(
+                    //   width: 20.h,
+                    // ),
+                    // const FullCardFood(
+                    //   label: "Salade",
+                    //   price: "11",
+                    //   image: "assets/food-4.png",
+                    //   userImage: ["assets/user-1.jpg"],
+                    // ),
+                  ],
                 ),
               )
-            ]),
-            SizedBox(
-              height: 10.h,
-            ),
-            Text(
-              "Plats",
-              style: GoogleFonts.poppins(
-                  fontSize: 32.sp, fontWeight: FontWeight.w700),
-            ),
-            SizedBox(
-              height: 10.h,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  ...ProductModel.products.map((e) {
-                    return FullCardFood(
-                      label: e.name,
-                      price: e.price,
-                      image: e.image,
-                      userImage: e.userImage,
-                      isSelected: e.name == "Salade" ? true : false,
-                      isBlackFriday: e.name == "Salade" ? true : false,
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    ProductScreen(product: e)));
-                      },
-                    );
-                  }),
-                  // const FullCardFood(
-                  //   label: "Salade",
-                  //   price: "25",
-                  //   image: "assets/food-4.png",
-                  //   userImage: ["assets/user-1.jpg"],
-                  //   isSelected: true,
-                  // ),
-                  // SizedBox(
-                  //   width: 20.h,
-                  // ),
-                  // const FullCardFood(
-                  //   label: "Viande",
-                  //   price: "25",
-                  //   image: "assets/food-3.png",
-                  //   userImage: ["assets/user-1.jpg", "assets/user-2.jpg"],
-                  //   isSelected: false,
-                  // ),
-                  // SizedBox(
-                  //   width: 20.h,
-                  // ),
-                  // const FullCardFood(
-                  //   label: "Crudité",
-                  //   price: "21",
-                  //   image: "assets/food-5.png",
-                  //   userImage: ["assets/user-1.jpg"],
-                  //   isSelected: false,
-                  // ),
-                ],
-              ),
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: [
-                  ...ProductModel.products.map((e) {
-                    return FullCardFood(
-                      label: e.name,
-                      price: e.price,
-                      image: e.image,
-                      userImage: e.userImage,
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductScreen(
-                                      product: e,
-                                    )));
-                      },
-                    );
-                  }),
-                  // const FullCardFood(
-                  //   label: "Crudité",
-                  //   price: "29",
-                  //   image: "assets/food-5.png",
-                  //   userImage: ["assets/user-1.jpg"],
-                  //   isSelected: false,
-                  // ),
-                  // SizedBox(
-                  //   width: 20.h,
-                  // ),
-                  // const FullCardFood(
-                  //   label: "Viande",
-                  //   price: "18",
-                  //   image: "assets/food-3.png",
-                  //   userImage: ["assets/user-1.jpg", "assets/user-2.jpg"],
-                  //   isSelected: false,
-                  // ),
-                  // SizedBox(
-                  //   width: 20.h,
-                  // ),
-                  // const FullCardFood(
-                  //   label: "Salade",
-                  //   price: "11",
-                  //   image: "assets/food-4.png",
-                  //   userImage: ["assets/user-1.jpg"],
-                  // ),
-                ],
-              ),
-            )
-          ],
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Padding(

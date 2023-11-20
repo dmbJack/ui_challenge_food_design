@@ -11,106 +11,108 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(236, 239, 234, 1),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Stack(
-            children: [
-              Stack(
-                children: [
-                  SizedBox(
-                    height: 250.h,
-                    width: double.infinity,
-                  ),
-                  Positioned(
-                    top: -120.h,
-                    right: 0,
-                    left: 0,
-                    child: Image.asset(
-                      product.image,
-                      fit: BoxFit.cover,
-                      width: 1.sw,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Stack(
+                  children: [
+                    SizedBox(
+                      height: 250.h,
+                      width: double.infinity,
                     ),
-                  ),
-                  Positioned(
-                    top: 50.h,
-                    left: 20.w,
-                    child: Container(
-                      padding: EdgeInsets.only(left: 8.w),
-                      width: 50.w,
-                      height: 50.w,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(15.w),
+                    Positioned(
+                      top: -120.h,
+                      right: 0,
+                      left: 0,
+                      child: Image.asset(
+                        product.image,
+                        fit: BoxFit.cover,
+                        width: 1.sw,
                       ),
-                      child: IconButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          icon: Icon(
-                            Icons.adaptive.arrow_back,
-                            size: 30.w,
-                          )),
                     ),
-                  )
+                    Positioned(
+                      top: 50.h,
+                      left: 20.w,
+                      child: Container(
+                        padding: EdgeInsets.only(left: 8.w),
+                        width: 50.w,
+                        height: 50.w,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(15.w),
+                        ),
+                        child: IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: Icon(
+                              Icons.adaptive.arrow_back,
+                              size: 30.w,
+                            )),
+                      ),
+                    )
+                  ],
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    product.name,
+                    style: GoogleFonts.poppins(
+                        fontSize: 35, fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.favorite_outline,
+                        size: 35,
+                      ))
                 ],
               ),
-            ],
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Row(
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Text(
+                "${product.kCal} kcal",
+                style: GoogleFonts.poppins(
+                    fontSize: 16, color: Colors.black.withOpacity(0.6)),
+              ),
+            ),
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  product.name,
-                  style: GoogleFonts.poppins(
-                      fontSize: 35, fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.favorite_outline,
-                      size: 35,
-                    ))
-              ],
+              children: [CheckList(), MiniProduct()],
             ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Text(
-              "${product.kCal} kcal",
-              style: GoogleFonts.poppins(
-                  fontSize: 16, color: Colors.black.withOpacity(0.6)),
+            const SizedBox(
+              height: 20,
             ),
-          ),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [CheckList(), MiniProduct()],
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
-            child: Text(
-              "Mais pratos saudaveis",
-              style: GoogleFonts.poppins(
-                  fontSize: 18.sp, fontWeight: FontWeight.w500),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Text(
+                "Mais pratos saudaveis",
+                style: GoogleFonts.poppins(
+                    fontSize: 18.sp, fontWeight: FontWeight.w500),
+              ),
             ),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                ...ProductModel.products.map((e) {
-                  return FoodCard(
-                      label: e.name, price: e.price, image: e.image);
-                })
-              ],
-            ),
-          )
-        ],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...ProductModel.products.map((e) {
+                    return FoodCard(
+                        label: e.name, price: e.price, image: e.image);
+                  })
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

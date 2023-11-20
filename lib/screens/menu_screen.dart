@@ -10,44 +10,46 @@ class MenuScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromRGBO(236, 239, 234, 1),
-      body: Column(
-        children: [
-          const SizedBox(
-            height: 60,
-          ),
-          const TopBar(),
-          const SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Align(
-              alignment: Alignment.topLeft,
-              child: RichText(
-                textAlign: TextAlign.start,
-                text: TextSpan(
-                    text: 'Bienvenue \n',
-                    style: GoogleFonts.nunito(
-                        fontSize: 28.sp,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black),
-                    children: [
-                      TextSpan(
-                        text: "Salmao",
-                        style: GoogleFonts.nunito(
-                            fontSize: 52.sp,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black),
-                      ),
-                    ]),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 60,
+            ),
+            const TopBar(),
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
+                alignment: Alignment.topLeft,
+                child: RichText(
+                  textAlign: TextAlign.start,
+                  text: TextSpan(
+                      text: 'Bienvenue \n',
+                      style: GoogleFonts.nunito(
+                          fontSize: 28.sp,
+                          fontWeight: FontWeight.w400,
+                          color: Colors.black),
+                      children: [
+                        TextSpan(
+                          text: "Salmao",
+                          style: GoogleFonts.nunito(
+                              fontSize: 52.sp,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                      ]),
+                ),
               ),
             ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          const MainCard()
-        ],
+            SizedBox(
+              height: 20.h,
+            ),
+            const MainCard()
+          ],
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 10),
@@ -220,7 +222,7 @@ class MainCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          bottom: -130.h,
+          bottom: -110.h,
           left: -30,
           child: SizedBox(
             height: 200.h,
