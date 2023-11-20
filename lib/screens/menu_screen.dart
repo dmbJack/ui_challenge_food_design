@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:ui_challenge_food/screens/foods_screen.dart';
 
 class MenuScreen extends StatelessWidget {
   const MenuScreen({super.key});
@@ -7,6 +9,7 @@ class MenuScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromRGBO(236, 239, 234, 1),
       body: Column(
         children: [
           const SizedBox(
@@ -25,14 +28,14 @@ class MenuScreen extends StatelessWidget {
                 text: TextSpan(
                     text: 'Bienvenue \n',
                     style: GoogleFonts.nunito(
-                        fontSize: 28,
+                        fontSize: 28.sp,
                         fontWeight: FontWeight.w400,
                         color: Colors.black),
                     children: [
                       TextSpan(
                         text: "Salmao",
                         style: GoogleFonts.nunito(
-                            fontSize: 52,
+                            fontSize: 52.sp,
                             fontWeight: FontWeight.bold,
                             color: Colors.black),
                       ),
@@ -40,14 +43,14 @@ class MenuScreen extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 20,
+          SizedBox(
+            height: 20.h,
           ),
           const MainCard()
         ],
       ),
       bottomNavigationBar: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -63,31 +66,39 @@ class MenuScreen extends StatelessWidget {
                   Icons.favorite_outline,
                   size: 30,
                 )),
-            Container(
-              height: 60,
-              width: 270,
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(90),
-                  color: Colors.green.withOpacity(0.8)),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Ajouter à la carte",
-                      style: GoogleFonts.nunito(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white)),
-                  const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: Colors.green,
-                    child: Icon(
-                      Icons.navigate_next,
-                      color: Colors.white,
-                      size: 30,
-                    ),
-                  )
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const FoodsScreen()));
+              },
+              child: Container(
+                height: 45.h,
+                width: 210.w,
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(90),
+                    color: const Color.fromRGBO(102, 204, 0, 0.8)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Ajouter à la carte",
+                        style: GoogleFonts.nunito(
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white)),
+                    CircleAvatar(
+                      radius: 25.w,
+                      backgroundColor: const Color.fromRGBO(102, 204, 0, 1),
+                      child: const Icon(
+                        Icons.navigate_next,
+                        color: Colors.white,
+                        size: 30,
+                      ),
+                    )
+                  ],
+                ),
               ),
             )
           ],
@@ -108,8 +119,8 @@ class MainCard extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Container(
-          height: 350,
-          width: 350,
+          height: 280.h,
+          width: 280.w,
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -124,10 +135,10 @@ class MainCard extends StatelessWidget {
         ),
         Positioned(
           top: -20,
-          right: -190,
+          right: -190.w,
           child: Container(
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(210),
+                borderRadius: BorderRadius.circular(210.w),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.2),
@@ -135,7 +146,7 @@ class MainCard extends StatelessWidget {
                     blurRadius: 10,
                   )
                 ]),
-            child: Image.asset("assets/food-4.png", height: 380),
+            child: Image.asset("assets/food-1.png", width: 320.w),
           ),
         ),
         Positioned(
@@ -155,21 +166,42 @@ class MainCard extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-              const Stack(
+              Stack(
                 clipBehavior: Clip.none,
                 children: [
-                  CircleAvatar(
-                    radius: 20,
-                    backgroundColor: Colors.blue,
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: Image.asset(
+                      "assets/user-1.jpg",
+                      width: 40.w,
+                      height: 40.w,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                   Positioned(
-                      right: -20,
-                      child: CircleAvatar(
-                          radius: 20, backgroundColor: Colors.red)),
+                    right: -20,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: Image.asset(
+                        "assets/user-2.jpg",
+                        width: 40.w,
+                        height: 40.w,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                   Positioned(
-                      right: -45,
-                      child: CircleAvatar(
-                          radius: 20, backgroundColor: Colors.yellow))
+                    right: -45,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(40),
+                      child: Image.asset(
+                        "assets/user-3.jpg",
+                        width: 40.w,
+                        height: 40.w,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  )
                 ],
               ),
               Text(
@@ -187,26 +219,36 @@ class MainCard extends StatelessWidget {
             ],
           ),
         ),
-        const Positioned(
-          bottom: -50,
-          left: 20,
-          child: SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: [
-                FoodCard(
-                    label: "Salade", price: "\$7", image: "assets/food-4.png"),
-                SizedBox(
-                  width: 35,
-                ),
-                FoodCard(
-                    label: "Viande", price: "\$25", image: "assets/food-3.png"),
-                SizedBox(
-                  width: 35,
-                ),
-                FoodCard(
-                    label: "Salade", price: "\$25", image: "assets/food-4.png"),
-              ],
+        Positioned(
+          bottom: -130.h,
+          left: -30,
+          child: SizedBox(
+            height: 200.h,
+            width: 1.sw,
+            child: SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  const FoodCard(
+                      label: "Salade",
+                      price: "\$7",
+                      image: "assets/food-1.png"),
+                  SizedBox(
+                    width: 35.w,
+                  ),
+                  const FoodCard(
+                      label: "Viande",
+                      price: "\$25",
+                      image: "assets/food-2.png"),
+                  SizedBox(
+                    width: 35.w,
+                  ),
+                  const FoodCard(
+                      label: "Salade",
+                      price: "\$25",
+                      image: "assets/food-3.png"),
+                ],
+              ),
             ),
           ),
         )
@@ -233,8 +275,8 @@ class FoodCard extends StatelessWidget {
       children: [
         Container(
           padding: const EdgeInsets.all(10),
-          height: 120,
-          width: 120,
+          height: 100.h,
+          width: 110.w,
           decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
@@ -252,22 +294,22 @@ class FoodCard extends StatelessWidget {
               Text(
                 label,
                 style: GoogleFonts.nunito(
-                    fontSize: 20, fontWeight: FontWeight.bold),
+                    fontSize: 20.sp, fontWeight: FontWeight.bold),
               ),
               Text(
-                "+\$$price",
+                "+$price",
                 style: GoogleFonts.nunito(
-                    fontSize: 16, fontWeight: FontWeight.bold),
+                    fontSize: 16.sp, fontWeight: FontWeight.bold),
               ),
             ],
           ),
         ),
         Positioned(
-          right: -25,
+          right: -25.w,
           bottom: 10,
           child: Container(
-            height: 80,
-            width: 80,
+            height: 70.h,
+            width: 70.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(80),
                 boxShadow: [
@@ -280,7 +322,7 @@ class FoodCard extends StatelessWidget {
                 ]),
             child: Image.asset(
               image,
-              height: 80,
+              width: 65.w,
               fit: BoxFit.cover,
             ),
           ),
@@ -303,8 +345,8 @@ class TopBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Container(
-            height: 50,
-            width: 50,
+            height: 50.w,
+            width: 50.w,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 border: Border.all(
@@ -313,9 +355,14 @@ class TopBar extends StatelessWidget {
                 )),
             child: IconButton(onPressed: () {}, icon: const Icon(Icons.menu)),
           ),
-          const CircleAvatar(
-            radius: 28,
-            backgroundColor: Colors.lightBlue,
+          ClipRRect(
+            borderRadius: BorderRadius.circular(50),
+            child: Image.asset(
+              "assets/user-1.jpg",
+              width: 50.w,
+              height: 50.w,
+              fit: BoxFit.cover,
+            ),
           )
         ],
       ),
